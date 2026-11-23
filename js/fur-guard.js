@@ -1,9 +1,9 @@
 "use strict";
 
 /* =====================================================
-   FUR-GUARD V1.1
+   FUR-GUARD V1.2
+   AUTOMATIC SECURITY ENGINE
    FUR-TAIL STUDIOS
-   24H SAFETY THAT NEVER STOPS
    ===================================================== */
 
 (() => {
@@ -14,14 +14,16 @@
     const panel = document.getElementById("panel");
 
     if (!wolf || !statusText || !statusLight || !panel) {
-        console.error("FUR-GUARD: Required HTML elements missing.");
+        console.error("Fur-Guard: Required HTML elements missing.");
         return;
     }
 
-    const WOLF_IMAGES = {
+    /* WOLF IMAGE FALLBACKS */
+
+    const wolfImages = {
         silver: [
-            "assets/fur-guard-silver.png",
             "assets/fur-guard-emblem.png",
+            "assets/fur-guard-silver.png",
             "assets/wolf-emblem.png"
         ],
         amber: [
@@ -32,58 +34,36 @@
         ]
     };
 
-    let currentImageAttempts = 0;
-
-    /* =====================================================
-       WOLF IMAGE SYSTEM
-       ===================================================== */
-
     function setWolf(state) {
+        const candidates = wolfImages[state];
+        let index = 0;
 
-        const sources = WOLF_IMAGES[state];
-
-        if (!sources) return;
-
-        currentImageAttempts = 0;
-
-        wolf.onerror = () => {
-
-            currentImageAttempts++;
-
-            if (currentImageAttempts < sources.length) {
-
-                wolf.src = sources[currentImageAttempts];
-
-            } else {
-
+        function tryNextImage() {
+            if (index >= candidates.length) {
                 console.error(
-                    "FUR-GUARD: Could not load wolf image:",
-                    sources
+                    "Fur-Guard: No matching image found for " + state,
+                    candidates
                 );
-
                 wolf.alt = "Fur-Guard " + state + " wolf emblem";
+                return;
             }
-        };
 
-        wolf.src = sources[0];
-        wolf.alt = "Fur-Guard " + state + " wolf emblem";
+            wolf.src = candidates[index++];
+        }
+
+        wolf.onerror = tryNextImage;
+        tryNextImage();
     }
 
-    /* =====================================================
-       STATUS SYSTEM
-       ===================================================== */
+    /* STATUS SYSTEM */
 
     function setStatus(text, colour) {
-
         statusText.textContent = text;
-
         statusLight.style.background = colour;
-        statusLight.style.boxShadow =
-            "0 0 12px " + colour;
+        statusLight.style.boxShadow = "0 0 12px " + colour;
     }
 
-    function showPanel(title, description) {
-
+    function showPanel(title, description, showLoading = false) {
         panel.replaceChildren();
 
         const heading = document.createElement("h2");
@@ -93,92 +73,80 @@
         paragraph.textContent = description;
 
         panel.append(heading, paragraph);
-    }
 
-    /* =====================================================
-       PAWSLVANIA LEGAL NOTICE
-       ===================================================== */
+        if (showLoading) {
+            const loading = document.createElement("div");
+            loading.className = "loading";
+            loading.setAttribute("aria-hidden", "true");
 
-    function createLegalNotice() {
+            for (let i = 0; i < 3; i++) {
+                loading.appendChild(document.createElement("span"));
+            }
 
-        if (document.getElementById("pawslvania-notice")) {
-            return;
+            panel.appendChild(loading);
         }
-
-        const notice = document.createElement("div");
-
-        notice.id = "pawslvania-notice";
-
-        notice.style.cssText = `
-            margin-top: 25px;
-            padding: 12px;
-            border: 1px solid #555;
-            border-radius: 8px;
-            color: #aaa;
-            font-size: 11px;
-            line-height: 1.7;
-        `;
-
-        const heading = document.createElement("strong");
-
-        heading.textContent = "PAWSLVANIA SECURITY NOTICE";
-
-        const joke = document.createElement("p");
-
-        joke.textContent =
-            '"In pawslvania touching this is a FEDARAL crime and WILL remove your treets"';
-
-        notice.append(heading, joke);
-
-        document.querySelector(".container").appendChild(notice);
     }
 
-    /* =====================================================
-       RANDOMCORE
-       Cryptographic random-number testing
-       ===================================================== */
+    function delay(milliseconds) {
+        return new Promise(resolve => setTimeout(resolve, milliseconds));
+    }
+
+    /* RANDOMCORE */
 
     function testRandomCore() {
-
-        if (!window.crypto || !window.crypto.getRandomValues) {
+        if (!window.crypto?.getRandomValues) {
             throw new Error("Secure random generation unavailable.");
         }
 
         const values = new Uint32Array(4);
-
         window.crypto.getRandomValues(values);
 
-        return values.some(value => value >= 0);
+        return values.length === 4;
     }
 
-    /* =====================================================
-       SHA-256 TEST
-       ===================================================== */
+    /*
+       The computer generates a random maths problem,
+       solves it internally, and checks its own result.
+       The visitor is never asked to answer.
+    */
+
+    function testComputerMaths() {
+        const values = new Uint32Array(2);
+
+        crypto.getRandomValues(values);
+
+        const first = (values[0] % 1000) + 1;
+        const second = (values[1] % 1000) + 1;
+
+        const problem = `${first} + ${second}`;
+        const computerAnswer = first + second;
+        const expectedAnswer = first + second;
+
+        console.log("RandomCore challenge:", problem);
+        console.log("Computer answer:", computerAnswer);
+
+        return computerAnswer === expectedAnswer;
+    }
+
+    /* SHA-256 */
 
     async function testSHA256() {
-
-        if (!window.crypto || !window.crypto.subtle) {
+        if (!window.crypto?.subtle) {
             throw new Error("SHA-256 unavailable.");
         }
 
-        const message = new TextEncoder().encode(
-            "FUR-GUARD-SECURITY-TEST"
+        const data = new TextEncoder().encode(
+            "FUR-GUARD-V1-SECURITY-CHECK"
         );
 
-        const result = await window.crypto.subtle.digest(
-            "SHA-256",
-            message
-        );
+        const hash = await crypto.subtle.digest("SHA-256", data);
 
-        return result.byteLength === 32;
+        return hash.byteLength === 32;
     }
 
-    /* =====================================================
-       SESSION STORAGE TEST
-       ===================================================== */
+    /* SESSION STORAGE */
 
     function testSessionStorage() {
-
         const key = "furGuardSystemTest";
 
         sessionStorage.setItem(key, "working");
@@ -190,83 +158,83 @@
         return result === "working";
     }
 
-    /* =====================================================
-       AUTOMATIC SECURITY CHECKS
-       ===================================================== */
+    /* BROWSER CAPABILITIES */
 
-    async function runChecks() {
-
-        const results = [];
-
-        // JavaScript
-        results.push({
-            name: "JavaScript",
-            passed: true
-        });
-
-        // RandomCore
-        try {
-
-            results.push({
-                name: "RandomCore",
-                passed: testRandomCore()
-            });
-
-        } catch (error) {
-
-            results.push({
-                name: "RandomCore",
-                passed: false,
-                error: error.message
-            });
-
-        }
-
-        // SHA-256
-        try {
-
-            results.push({
-                name: "SHA-256",
-                passed: await testSHA256()
-            });
-
-        } catch (error) {
-
-            results.push({
-                name: "SHA-256",
-                passed: false,
-                error: error.message
-            });
-
-        }
-
-        // Session storage
-        try {
-
-            results.push({
-                name: "Session Storage",
-                passed: testSessionStorage()
-            });
-
-        } catch (error) {
-
-            results.push({
-                name: "Session Storage",
-                passed: false,
-                error: error.message
-            });
-
-        }
-
-        return results;
+    function testBrowser() {
+        return (
+            typeof window.fetch === "function" &&
+            typeof window.Promise === "function" &&
+            typeof window.TextEncoder === "function"
+        );
     }
 
-    /* =====================================================
-       ADDITIONAL CHECKS
-       ===================================================== */
+    /* SECURITY CHECKS */
+
+    async function runChecks() {
+        const checks = [];
+
+        const tests = [
+            ["JavaScript", () => true],
+            ["RandomCore", testRandomCore],
+            ["Computer Maths", testComputerMaths],
+            ["SHA-256", testSHA256],
+            ["Session Storage", testSessionStorage],
+            ["Browser Capabilities", testBrowser]
+        ];
+
+        for (const [name, test] of tests) {
+            try {
+                const result = await test();
+
+                checks.push({
+                    name,
+                    passed: result === true
+                });
+
+            } catch (error) {
+                console.error(name + " failed:", error);
+
+                checks.push({
+                    name,
+                    passed: false
+                });
+            }
+
+            await delay(250);
+        }
+
+        return checks;
+    }
+
+    /* VERIFICATION PASSED */
+
+    function verificationPassed() {
+        setWolf("silver");
+
+        setStatus(
+            "VERIFICATION PASSED",
+            "#bdbdbd"
+        );
+
+        showPanel(
+            "All checks completed.",
+            "Fur-Guard has completed its automatic browser checks. Welcome to Fur-Tail Studios.",
+            true
+        );
+
+        sessionStorage.setItem(
+            "furGuardVerified",
+            "true"
+        );
+
+        setTimeout(() => {
+            window.location.replace("index.html");
+        }, 2200);
+    }
+
+    /* ADDITIONAL CHECKS */
 
     async function additionalChecks() {
-
         setWolf("amber");
 
         setStatus(
@@ -276,50 +244,18 @@
 
         showPanel(
             "We need to check a little more.",
-            "Fur-Guard is retrying the browser security checks."
+            "Fur-Guard is repeating its checks automatically.",
+            true
         );
 
-        await new Promise(resolve => setTimeout(resolve, 1000));
+        await delay(1200);
 
         return runChecks();
     }
 
-    /* =====================================================
-       VERIFICATION PASSED
-       ===================================================== */
-
-    function verificationPassed() {
-
-        setWolf("silver");
-
-        setStatus(
-            "VERIFICATION PASSED",
-            "#bdbdbd"
-        );
-
-        showPanel(
-            "You're cleared to enter.",
-            "Fur-Guard has completed its browser checks. Redirecting you to Fur-Tail Studios."
-        );
-
-        sessionStorage.setItem(
-            "furGuardVerified",
-            "true"
-        );
-
-        setTimeout(() => {
-
-            window.location.replace("index.html");
-
-        }, 1800);
-    }
-
-    /* =====================================================
-       VERIFICATION FAILED
-       ===================================================== */
+    /* FAILED CHECKS */
 
     function verificationFailed(results) {
-
         setWolf("red");
 
         setStatus(
@@ -328,19 +264,18 @@
         );
 
         const failed = results
-            .filter(result => !result.passed)
-            .map(result => result.name)
+            .filter(check => !check.passed)
+            .map(check => check.name)
             .join(", ");
 
         showPanel(
-            "We need to run some more checks.",
-            "These browser features could not be verified: " +
+            "Additional verification required.",
+            "These browser checks could not be completed: " +
             failed +
             ". Please check your browser settings and retry."
         );
 
         const retry = document.createElement("button");
-
         retry.textContent = "RETRY CHECKS";
 
         retry.addEventListener("click", initialise);
@@ -348,12 +283,9 @@
         panel.appendChild(retry);
     }
 
-    /* =====================================================
-       INITIALISATION
-       ===================================================== */
+    /* INITIALISATION */
 
     async function initialise() {
-
         sessionStorage.removeItem("furGuardVerified");
 
         setWolf("silver");
@@ -365,43 +297,34 @@
 
         showPanel(
             "We need to run our checks.",
-            "We won't be a moment."
+            "We won't be a moment.",
+            true
         );
 
         try {
-
             let results = await runChecks();
 
             console.table(results);
 
-            let failed = results.some(
-                result => !result.passed
-            );
+            let failed = results.some(check => !check.passed);
 
-            // Retry automatically once if something fails.
             if (failed) {
-
                 results = await additionalChecks();
 
                 console.table(results);
 
-                failed = results.some(
-                    result => !result.passed
-                );
+                failed = results.some(check => !check.passed);
             }
 
             if (failed) {
-
                 verificationFailed(results);
-
                 return;
             }
 
             verificationPassed();
 
         } catch (error) {
-
-            console.error("FUR-GUARD ERROR:", error);
+            console.error("Fur-Guard system error:", error);
 
             setWolf("red");
 
@@ -412,11 +335,10 @@
 
             showPanel(
                 "Fur-Guard encountered an error.",
-                "The security checks could not be completed. Please retry."
+                "The checks could not be completed. Please retry."
             );
 
             const retry = document.createElement("button");
-
             retry.textContent = "RETRY";
 
             retry.addEventListener("click", initialise);
@@ -424,12 +346,6 @@
             panel.appendChild(retry);
         }
     }
-
-    /* =====================================================
-       START FUR-GUARD
-       ===================================================== */
-
-    createLegalNotice();
 
     initialise();
 
