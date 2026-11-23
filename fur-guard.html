@@ -1,332 +1,272 @@
 <!DOCTYPE html>
 <html lang="en">
-
 <head>
-    <meta charset="UTF-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<meta name="theme-color" content="#080808">
 
-    <meta name="theme-color" content="#080808">
-    <meta name="description" content="Fur-Guard security verification by Fur-Tail Studios.">
+<title>Fur-Guard | Security Verification</title>
 
-    <title>Fur-Guard | Security Verification</title>
+<style>
+* {
+    box-sizing: border-box;
+}
 
-    <style>
-        * {
-            box-sizing: border-box;
-        }
+body {
+    margin: 0;
+    min-height: 100vh;
+    background: radial-gradient(circle at center, #252525, #080808 75%);
+    color: #e5e5e5;
+    font-family: Arial, Helvetica, sans-serif;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    text-align: center;
+}
 
-        body {
-            margin: 0;
-            min-height: 100vh;
-            background:
-                radial-gradient(
-                    circle at 50% 35%,
-                    #252525 0%,
-                    #111111 45%,
-                    #050505 100%
-                );
+.container {
+    width: 90%;
+    max-width: 600px;
+    padding: 35px 20px;
+}
 
-            color: #e5e5e5;
-            font-family: Arial, Helvetica, sans-serif;
+.logo {
+    width: 175px;
+    height: 175px;
+    object-fit: contain;
+    display: block;
+    margin: 0 auto 10px;
+}
 
-            display: flex;
-            justify-content: center;
-            align-items: center;
+.bones {
+    display: flex;
+    justify-content: center;
+    gap: 35px;
+    margin: 10px 0 25px;
+}
 
-            text-align: center;
-        }
+.bone {
+    font-size: 30px;
+    display: inline-block;
+    animation: spinBone 2s linear infinite;
+}
 
-        .container {
-            width: 90%;
-            max-width: 600px;
-            padding: 45px 20px;
-        }
+.bone:nth-child(2) {
+    animation-direction: reverse;
+    animation-delay: .3s;
+}
 
-        /* LOGO */
+@keyframes spinBone {
+    from { transform: rotate(0deg); }
+    to { transform: rotate(360deg); }
+}
 
-        .logo-container {
-            margin-bottom: 20px;
-        }
+h1 {
+    font-size: 34px;
+    letter-spacing: 6px;
+    margin: 10px 0;
+}
 
-        .logo {
-            width: 175px;
-            height: 175px;
-            object-fit: contain;
-            display: block;
-            margin: auto;
-        }
+.subtitle {
+    color: #999;
+    font-size: 11px;
+    letter-spacing: 3px;
+    margin-bottom: 35px;
+}
 
-        /* BRANDING */
+.status {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    gap: 12px;
+    margin: 25px 0;
+    font-size: 12px;
+    letter-spacing: 3px;
+    color: #ccc;
+}
 
-        h1 {
-            font-size: 34px;
-            letter-spacing: 6px;
-            margin: 10px 0;
-        }
+.status-light {
+    width: 9px;
+    height: 9px;
+    border-radius: 50%;
+    background: #bbb;
+    box-shadow: 0 0 12px #bbb;
+}
 
-        .subtitle {
-            color: #999;
-            font-size: 11px;
-            letter-spacing: 3px;
-            margin-bottom: 40px;
-        }
+.panel {
+    background: rgba(255,255,255,.045);
+    border: 1px solid #393939;
+    border-radius: 14px;
+    padding: 35px 25px;
+    min-height: 190px;
+    box-shadow: 0 10px 40px rgba(0,0,0,.35);
+}
 
-        /* STATUS */
+.panel h2 {
+    font-size: 23px;
+    color: #eee;
+}
 
-        .status {
-            display: flex;
-            justify-content: center;
-            align-items: center;
+.panel p {
+    color: #aaa;
+    line-height: 1.7;
+    font-size: 14px;
+}
 
-            gap: 12px;
+.loading {
+    display: flex;
+    justify-content: center;
+    gap: 8px;
+    margin: 25px 0;
+}
 
-            margin: 30px 0;
+.loading span {
+    width: 8px;
+    height: 8px;
+    background: #bbb;
+    border-radius: 50%;
+    animation: pulse 1.2s infinite ease-in-out;
+}
 
-            font-size: 12px;
-            letter-spacing: 3px;
-            color: #ccc;
-        }
+.loading span:nth-child(2) {
+    animation-delay: .2s;
+}
 
-        .status-light {
-            width: 9px;
-            height: 9px;
+.loading span:nth-child(3) {
+    animation-delay: .4s;
+}
 
-            border-radius: 50%;
+@keyframes pulse {
+    0%, 80%, 100% {
+        opacity: .3;
+        transform: scale(.8);
+    }
+    40% {
+        opacity: 1;
+        transform: scale(1.2);
+    }
+}
 
-            background: #bbb;
-            box-shadow: 0 0 12px #bbb;
-        }
+footer {
+    margin-top: 40px;
+    color: #777;
+    font-size: 10px;
+    letter-spacing: 2px;
+    line-height: 2.2;
+}
 
-        /* VERIFICATION PANEL */
+footer strong {
+    color: #bbb;
+}
 
-        .panel {
-            background: rgba(255,255,255,0.045);
+.legal-notice {
+    margin-top: 30px;
+    padding: 14px;
+    border: 1px solid #383838;
+    border-radius: 8px;
+    color: #888;
+    font-size: 10px;
+    line-height: 1.8;
+}
 
-            border: 1px solid #393939;
-            border-radius: 14px;
+.legal-notice strong {
+    color: #bbb;
+}
 
-            padding: 35px 25px;
+button {
+    padding: 12px 24px;
+    border: 1px solid #777;
+    border-radius: 5px;
+    background: #bbb;
+    color: #111;
+    cursor: pointer;
+    font-weight: bold;
+}
 
-            min-height: 190px;
+button:focus-visible {
+    outline: 3px solid #ffad42;
+    outline-offset: 4px;
+}
 
-            box-shadow:
-                0 10px 40px rgba(0,0,0,0.35);
-        }
+@media (prefers-reduced-motion: reduce) {
+    .bone, .loading span {
+        animation: none;
+    }
+}
 
-        .panel h2 {
-            font-size: 23px;
-            margin-top: 5px;
-            color: #eee;
-        }
+@media (max-width: 480px) {
+    .logo {
+        width: 145px;
+        height: 145px;
+    }
 
-        .panel p {
-            color: #aaa;
-            line-height: 1.7;
-            font-size: 14px;
-        }
-
-        /* LOADING ANIMATION */
-
-        .loading {
-            display: flex;
-            justify-content: center;
-            gap: 8px;
-            margin: 25px 0;
-        }
-
-        .loading span {
-            width: 8px;
-            height: 8px;
-
-            background: #bbb;
-            border-radius: 50%;
-
-            animation: pulse 1.2s infinite ease-in-out;
-        }
-
-        .loading span:nth-child(2) {
-            animation-delay: 0.2s;
-        }
-
-        .loading span:nth-child(3) {
-            animation-delay: 0.4s;
-        }
-
-        @keyframes pulse {
-            0%, 80%, 100% {
-                opacity: 0.3;
-                transform: scale(0.8);
-            }
-
-            40% {
-                opacity: 1;
-                transform: scale(1.2);
-            }
-        }
-
-        /* FOOTER */
-
-        footer {
-            margin-top: 45px;
-
-            color: #777;
-            font-size: 10px;
-            letter-spacing: 2px;
-            line-height: 2.2;
-        }
-
-        footer strong {
-            color: #bbb;
-        }
-
-        /* PAWSLVANIA */
-
-        .legal-notice {
-            margin-top: 35px;
-
-            padding: 14px;
-
-            border: 1px solid #383838;
-            border-radius: 8px;
-
-            color: #888;
-            font-size: 10px;
-            line-height: 1.8;
-        }
-
-        .legal-notice strong {
-            color: #bbb;
-        }
-
-        /* ACCESSIBILITY */
-
-        button {
-            font: inherit;
-        }
-
-        @media (prefers-reduced-motion: reduce) {
-            *,
-            *::before,
-            *::after {
-                animation: none !important;
-                transition: none !important;
-            }
-        }
-
-        @media (max-width: 480px) {
-            .logo {
-                width: 140px;
-                height: 140px;
-            }
-
-            h1 {
-                font-size: 27px;
-            }
-
-            .panel {
-                padding: 25px 15px;
-            }
-        }
-
-    </style>
+    h1 {
+        font-size: 27px;
+    }
+}
+</style>
 </head>
 
 <body>
 
-    <main class="container">
+<main class="container">
 
-        <!-- FUR-GUARD LOGO -->
+    <!-- FUR-GUARD WOLF -->
+    <img
+        id="wolf"
+        class="logo"
+        src="assets/fur-guard-emblem.png"
+        alt="Fur-Guard wolf emblem"
+    >
 
-        <div class="logo-container">
+    <!-- SPINNING BONES -->
+    <div class="bones" aria-label="Fur-Guard loading animation">
+        <span class="bone" aria-hidden="true">🦴</span>
+        <span class="bone" aria-hidden="true">🦴</span>
+    </div>
 
-            <img
-                id="wolf"
-                class="logo"
-                src="assets/fur-guard-silver.png"
-                alt="Fur-Guard silver wolf emblem"
-            >
+    <h1>FUR-GUARD</h1>
 
+    <div class="subtitle">
+        24H SAFETY THAT NEVER STOPS
+    </div>
+
+    <!-- SECURITY STATUS -->
+    <div class="status" aria-live="polite">
+        <span class="status-light" id="statusLight"></span>
+        <span id="statusText">INITIALISING</span>
+    </div>
+
+    <!-- VERIFICATION PANEL -->
+    <section class="panel" id="panel" aria-live="polite" aria-atomic="true">
+        <h2>We need to run our checks.</h2>
+        <p>We won't be a moment.</p>
+
+        <div class="loading" aria-hidden="true">
+            <span></span>
+            <span></span>
+            <span></span>
         </div>
+    </section>
 
-        <!-- BRANDING -->
+    <footer>
+        <strong>FUR-GUARD SYSTEMS ACTIVE</strong>
+        <br>
+        24H SAFETY THAT NEVER STOPS
+        <br><br>
+        POWERED BY FUR-TAIL STUDIOS
+    </footer>
 
-        <h1>FUR-GUARD</h1>
+    <div class="legal-notice">
+        <strong>PAWSLVANIA SECURITY NOTICE</strong>
+        <br>
+        "In pawslvania touching this is a FEDARAL crime and WILL remove your treets"
+    </div>
 
-        <div class="subtitle">
-            24H SAFETY THAT NEVER STOPS
-        </div>
+</main>
 
-        <!-- SECURITY STATUS -->
-
-        <div class="status" aria-live="polite">
-
-            <span
-                class="status-light"
-                id="statusLight"
-            ></span>
-
-            <span id="statusText">
-                INITIALISING SECURITY SYSTEMS
-            </span>
-
-        </div>
-
-        <!-- VERIFICATION PANEL -->
-
-        <section
-            class="panel"
-            id="panel"
-            aria-live="polite"
-            aria-atomic="true"
-        >
-
-            <h2>We need to run our checks.</h2>
-
-            <p>
-                We won't be a moment.
-            </p>
-
-            <div class="loading" aria-hidden="true">
-                <span></span>
-                <span></span>
-                <span></span>
-            </div>
-
-        </section>
-
-        <!-- FOOTER -->
-
-        <footer>
-
-            <strong>FUR-GUARD SYSTEMS ACTIVE</strong>
-
-            <br>
-
-            24H SAFETY THAT NEVER STOPS
-
-            <br><br>
-
-            POWERED BY FUR-TAIL STUDIOS
-
-        </footer>
-
-        <!-- PAWSLVANIA LEGAL DEPARTMENT -->
-
-        <div class="legal-notice">
-
-            <strong>PAWSLVANIA SECURITY NOTICE</strong>
-
-            <br>
-
-            "In pawslvania touching this is a FEDARAL crime and WILL remove your treets"
-
-        </div>
-
-    </main>
-
-    <!-- FUR-GUARD SECURITY ENGINE -->
-
-    <script src="js/fur-guard.js" defer></script>
+<!-- FUR-GUARD SECURITY ENGINE -->
+<script src="js/fur-guard.js" defer></script>
 
 </body>
 </html>
