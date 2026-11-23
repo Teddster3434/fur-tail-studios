@@ -1,23 +1,14 @@
 <!DOCTYPE html>
 <html lang="en">
-
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <meta name="theme-color" content="#050505">
 
-    <title>Fur-Tail Studios | Independent Game Development</title>
+    <title>Fur-Tail Studios | Independent Development</title>
 
     <meta name="description" content="Fur-Tail Studios. Independent development. Unlimited imagination.">
 
     <style>
-
-        /* =================================
-           FUR-TAIL STUDIOS
-           Independent development.
-           Unlimited imagination.
-        ================================= */
-
         * {
             margin: 0;
             padding: 0;
@@ -29,26 +20,19 @@
         }
 
         body {
-            background: #050505;
-            color: #ffffff;
+            background:
+                radial-gradient(ellipse at top, #202020 0%, #090909 45%, #000 100%);
+            color: #f2f2f2;
             font-family: Arial, Helvetica, sans-serif;
             overflow-x: hidden;
         }
 
-        /* BACKGROUND */
-
-        body::before {
-            content: "";
-            position: fixed;
-            inset: 0;
-            background: radial-gradient(
-                ellipse at center,
-                #202020 0%,
-                #0a0a0a 55%,
-                #000000 100%
-            );
-            z-index: -2;
+        a {
+            color: inherit;
+            text-decoration: none;
         }
+
+        /* PARTICLE BACKGROUND */
 
         #particles {
             position: fixed;
@@ -56,256 +40,268 @@
             width: 100%;
             height: 100%;
             pointer-events: none;
-            z-index: -1;
+            z-index: 0;
         }
 
-        /* =================================
-           HEADER AND NAVIGATION
-        ================================= */
+        /* MAIN CONTENT */
+
+        .page-content {
+            position: relative;
+            z-index: 1;
+        }
+
+        /* NAVIGATION */
 
         header {
             width: 100%;
-            min-height: 125px;
+            padding: 25px 5%;
             display: flex;
             justify-content: center;
-            align-items: center;
-            gap: 55px;
-            padding: 15px 25px;
-            border-bottom: 1px solid #292929;
-            background: rgba(0, 0, 0, 0.45);
-        }
-
-        .navigation {
-            display: flex;
             align-items: center;
             gap: 35px;
+            position: relative;
+            z-index: 5;
         }
 
-        .navigation a {
-            color: #999999;
-            text-decoration: none;
-            font-size: 11px;
-            letter-spacing: 3px;
-            padding: 12px 0;
-            transition: 0.3s ease;
-        }
-
-        .navigation a:hover {
-            color: #ffffff;
-            text-shadow: 0 0 15px #ffffff;
-        }
-
-        /* WOLF EMBLEM */
-
-        .logo-link {
+        .nav-side {
             display: flex;
+            gap: 30px;
             align-items: center;
-            justify-content: center;
+        }
+
+        .nav-side a {
+            color: #c8c8c8;
+            font-size: 13px;
+            letter-spacing: 3px;
+            transition: 0.3s;
+        }
+
+        .nav-side a:hover {
+            color: white;
+            text-shadow: 0 0 12px silver;
         }
 
         .header-logo {
             width: 105px;
             height: 105px;
             object-fit: contain;
-            transition: 0.5s ease;
-            filter: drop-shadow(0 0 12px #ffffff20);
+            filter: drop-shadow(0 0 12px #777);
         }
 
-        .header-logo:hover {
-            transform: scale(1.08);
-            filter: drop-shadow(0 0 25px #ffffff80);
-        }
-
-        /* =================================
-           MAIN HERO SECTION
-        ================================= */
+        /* HERO */
 
         .hero {
-            min-height: 78vh;
+            min-height: 75vh;
             display: flex;
             flex-direction: column;
             justify-content: center;
             align-items: center;
             text-align: center;
-            padding: 80px 20px;
-            animation: fadeIn 1.5s ease;
+            padding: 60px 20px;
         }
 
         .hero h1 {
-            font-size: clamp(35px, 6vw, 65px);
-            font-weight: 900;
+            font-size: clamp(35px, 7vw, 75px);
             letter-spacing: 8px;
+            text-transform: uppercase;
             background: linear-gradient(
                 180deg,
                 #ffffff,
                 #999999,
                 #eeeeee,
-                #777777
+                #555555
             );
-            background-clip: text;
             -webkit-background-clip: text;
+            background-clip: text;
             color: transparent;
+            margin-bottom: 20px;
         }
 
-        .subtitle {
-            color: #999999;
-            font-size: 11px;
-            letter-spacing: 5px;
-            margin-top: 20px;
+        .hero p {
+            color: #bdbdbd;
+            letter-spacing: 4px;
+            font-size: clamp(12px, 2vw, 16px);
         }
 
-        .motto {
-            color: #aaaaaa;
-            font-size: 15px;
-            letter-spacing: 2px;
-            line-height: 2;
-            margin-top: 35px;
+        .hero-divider {
+            width: 180px;
+            height: 2px;
+            background: linear-gradient(90deg, transparent, silver, transparent);
+            margin: 35px auto;
         }
 
-        .motto span {
-            color: #ffffff;
-        }
+        /* SECTIONS */
 
-        /* EXPLORE BUTTON */
-
-        .button {
-            display: inline-block;
-            margin-top: 40px;
-            padding: 17px 35px;
-            border: 1px solid #888888;
-            color: #ffffff;
-            text-decoration: none;
-            font-size: 11px;
-            letter-spacing: 3px;
-            transition: 0.4s ease;
-        }
-
-        .button:hover {
-            background: #ffffff;
-            color: #000000;
-            box-shadow: 0 0 30px #ffffff50;
-            transform: translateY(-4px);
-        }
-
-        /* =================================
-           CONTENT SECTIONS
-        ================================= */
-
-        .content {
-            min-height: 60vh;
-            padding: 110px 25px;
+        section {
+            padding: 100px 10%;
             text-align: center;
-            border-top: 1px solid #252525;
+            scroll-margin-top: 30px;
         }
 
-        .content h2 {
-            font-size: clamp(28px, 5vw, 42px);
-            letter-spacing: 5px;
+        section h2 {
+            font-size: 32px;
+            letter-spacing: 6px;
+            text-transform: uppercase;
             margin-bottom: 25px;
+            color: #e5e5e5;
         }
 
-        .content p {
-            color: #999999;
-            line-height: 2;
-            font-size: 14px;
-            max-width: 700px;
+        section p {
+            max-width: 750px;
             margin: auto;
+            line-height: 1.9;
+            color: #aaa;
+            font-size: 16px;
         }
 
-        /* GAME PLACEHOLDER */
+        /* GAME CARDS */
+
+        .games-container {
+            display: flex;
+            justify-content: center;
+            flex-wrap: wrap;
+            gap: 25px;
+            margin-top: 45px;
+        }
 
         .game-card {
-            max-width: 750px;
-            margin: 55px auto 0;
-            padding: 75px 20px;
-            border: 1px solid #333333;
-            background: linear-gradient(
-                135deg,
-                #171717,
-                #050505
-            );
-            transition: 0.4s ease;
+            width: 280px;
+            padding: 35px 25px;
+            background: linear-gradient(145deg, #171717, #080808);
+            border: 1px solid #383838;
+            transition: 0.3s;
         }
 
         .game-card:hover {
-            border-color: #aaaaaa;
-            box-shadow: 0 0 35px #ffffff20;
+            border-color: #aaa;
+            transform: translateY(-6px);
+            box-shadow: 0 0 25px #222;
         }
 
         .game-card h3 {
-            font-size: 20px;
-            letter-spacing: 4px;
-            margin-bottom: 20px;
+            letter-spacing: 3px;
+            margin-bottom: 15px;
         }
 
-        .game-card .status {
-            color: #bbbbbb;
-            font-size: 10px;
-            letter-spacing: 4px;
-            margin-bottom: 20px;
+        .game-card p {
+            font-size: 14px;
         }
 
-        /* ABOUT SECTION */
-
-        #about {
-            background: rgba(255, 255, 255, 0.015);
-        }
-
-        /* =================================
-           FOOTER
-        ================================= */
+        /* FOOTER */
 
         footer {
+            padding: 40px 20px;
             text-align: center;
-            padding: 60px 20px;
-            border-top: 1px solid #292929;
-            color: #888888;
-            font-size: 11px;
+            border-top: 1px solid #252525;
+            color: #777;
+            font-size: 12px;
             letter-spacing: 2px;
-            line-height: 2.5;
         }
 
-        footer strong {
-            color: #ffffff;
-            letter-spacing: 4px;
+        /* FUR-GUARD FLOATING BADGE */
+
+        #furguard-badge {
+            position: fixed;
+            bottom: 22px;
+            right: 22px;
+            z-index: 9999;
+
+            display: flex;
+            align-items: center;
+            gap: 12px;
+
+            padding: 12px 38px 12px 12px;
+
+            background: rgba(8, 8, 8, 0.94);
+            border: 1px solid #777;
+            border-radius: 8px;
+
+            box-shadow:
+                0 0 12px rgba(255,255,255,0.08),
+                0 5px 25px rgba(0,0,0,0.7);
+
+            backdrop-filter: blur(10px);
+            -webkit-backdrop-filter: blur(10px);
+
+            animation: badge-appear 0.8s ease;
         }
 
-        /* =================================
-           ANIMATIONS
-        ================================= */
+        #furguard-badge img {
+            width: 48px;
+            height: 48px;
+            object-fit: contain;
+            flex-shrink: 0;
+        }
 
-        @keyframes fadeIn {
+        .furguard-text {
+            display: flex;
+            flex-direction: column;
+            gap: 5px;
+        }
 
+        .furguard-title {
+            color: #eeeeee;
+            font-size: 13px;
+            font-weight: bold;
+            letter-spacing: 1px;
+            white-space: nowrap;
+        }
+
+        .furguard-subtitle {
+            color: #999;
+            font-size: 10px;
+            letter-spacing: 0.5px;
+            white-space: nowrap;
+        }
+
+        .furguard-close {
+            position: absolute;
+            top: 5px;
+            right: 8px;
+
+            background: transparent;
+            border: none;
+            color: #888;
+
+            font-size: 19px;
+            cursor: pointer;
+            line-height: 1;
+            padding: 2px 5px;
+
+            transition: 0.2s;
+        }
+
+        .furguard-close:hover {
+            color: white;
+            text-shadow: 0 0 8px white;
+        }
+
+        @keyframes badge-appear {
             from {
                 opacity: 0;
-                transform: translateY(30px);
+                transform: translateY(15px);
             }
 
             to {
                 opacity: 1;
                 transform: translateY(0);
             }
-
         }
 
-        /* =================================
-           MOBILE RESPONSIVENESS
-        ================================= */
+        /* MOBILE */
 
         @media (max-width: 650px) {
-
             header {
                 gap: 12px;
-                padding: 15px 8px;
-                min-height: 90px;
+                padding: 20px 10px;
             }
 
-            .navigation {
+            .nav-side {
                 gap: 12px;
             }
 
-            .navigation a {
-                font-size: 8px;
+            .nav-side a {
+                font-size: 10px;
                 letter-spacing: 1px;
             }
 
@@ -314,168 +310,211 @@
                 height: 65px;
             }
 
-            .hero h1 {
-                letter-spacing: 3px;
+            section {
+                padding: 75px 7%;
             }
 
-            .subtitle {
-                letter-spacing: 3px;
+            #furguard-badge {
+                bottom: 12px;
+                right: 12px;
+                padding: 9px 32px 9px 9px;
+                gap: 8px;
+            }
+
+            #furguard-badge img {
+                width: 38px;
+                height: 38px;
+            }
+
+            .furguard-title {
+                font-size: 11px;
+            }
+
+            .furguard-subtitle {
                 font-size: 9px;
             }
-
-            .content {
-                padding: 80px 20px;
-            }
-
         }
 
-        /* ACCESSIBILITY */
-
         @media (prefers-reduced-motion: reduce) {
-
             *,
             *::before,
             *::after {
-                animation: none !important;
-                transition: none !important;
                 scroll-behavior: auto !important;
+                animation-duration: 0.01ms !important;
+                transition-duration: 0.01ms !important;
             }
-
         }
-
     </style>
-
 </head>
 
 <body>
 
     <canvas id="particles"></canvas>
 
-    <!-- HEADER -->
+    <div class="page-content">
 
-    <header>
+        <!-- NAVIGATION -->
 
-        <nav class="navigation">
-            <a href="#home">HOME</a>
-            <a href="#games">GAMES</a>
-        </nav>
+        <header>
 
-        <a href="#home" class="logo-link">
+            <nav class="nav-side">
+                <a href="#home">HOME</a>
+                <a href="#games">GAMES</a>
+            </nav>
 
             <img
                 src="assets/wolf-emblem.png"
-                alt="Fur-Tail Studios Wolf Emblem"
+                alt="Fur-Tail Studios"
                 class="header-logo"
             >
 
-        </a>
+            <nav class="nav-side">
+                <a href="#about">ABOUT</a>
+                <a href="#contact">CONTACT</a>
+            </nav>
 
-        <nav class="navigation">
-            <a href="#about">ABOUT</a>
-            <a href="#contact">CONTACT</a>
-        </nav>
+        </header>
 
-    </header>
+        <!-- HERO -->
 
-    <!-- HOMEPAGE -->
+        <main>
 
-    <main>
+            <div class="hero" id="home">
 
-        <section class="hero" id="home">
+                <h1>Fur-Tail Studios</h1>
 
-            <h1>FUR-TAIL STUDIOS</h1>
+                <div class="hero-divider"></div>
 
-            <p class="subtitle">
-                INDEPENDENT GAME DEVELOPMENT
-            </p>
-
-            <p class="motto">
-                Independent development.<br>
-                <span>Unlimited imagination.</span>
-            </p>
-
-            <a href="#games" class="button">
-                DISCOVER OUR GAMES →
-            </a>
-
-        </section>
-
-        <!-- GAMES -->
-
-        <section class="content" id="games">
-
-            <h2>OUR GAMES</h2>
-
-            <p>
-                Original worlds. Extraordinary adventures.
-                Stories without limits.
-            </p>
-
-            <div class="game-card">
-
-                <p class="status">IN DEVELOPMENT</p>
-
-                <h3>COMING SOON</h3>
-
-                <p>
-                    Something extraordinary is taking shape.
-                    Follow our journey as we develop our games.
-                </p>
+                <p>INDEPENDENT DEVELOPMENT. UNLIMITED IMAGINATION.</p>
 
             </div>
 
-        </section>
+            <!-- GAMES -->
 
-        <!-- ABOUT -->
+            <section id="games">
 
-        <section class="content" id="about">
+                <h2>Our Games</h2>
 
-            <h2>ABOUT US</h2>
+                <p>
+                    Discover the worlds we create.
+                    Our games are built around imagination,
+                    creativity and unforgettable experiences.
+                </p>
 
-            <p>
-                Fur-Tail Studios is an independent game development
-                studio driven by creativity, imagination and originality.
+                <div class="games-container">
 
-                Our ambition is to create memorable experiences,
-                explore new worlds and bring original ideas to life.
-            </p>
+                    <div class="game-card">
+                        <h3>COMING SOON</h3>
+                        <p>
+                            New adventures are currently in development.
+                            More information will be announced soon.
+                        </p>
+                    </div>
 
-        </section>
+                </div>
 
-        <!-- CONTACT -->
+            </section>
 
-        <section class="content" id="contact">
+            <!-- ABOUT -->
 
-            <h2>CONTACT</h2>
+            <section id="about">
 
-            <p>
-                For business enquiries, collaborations and
-                general studio information, contact Fur-Tail Studios.
-            </p>
+                <h2>About Us</h2>
 
-        </section>
+                <p>
+                    Fur-Tail Studios is an independent development studio
+                    focused on creating imaginative experiences,
+                    original worlds and memorable games.
+                    We believe creativity should have no limits.
+                </p>
 
-    </main>
+            </section>
 
-    <!-- FOOTER -->
+            <!-- CONTACT -->
 
-    <footer>
+            <section id="contact">
 
-        <strong>FUR-TAIL STUDIOS</strong>
+                <h2>Contact</h2>
 
-        <br>
+                <p>
+                    Interested in our projects or want to get in touch?
+                    More contact information will be available here soon.
+                </p>
 
-        Independent development. Unlimited imagination.
+            </section>
 
-        <br>
+        </main>
 
-        © 2026 Fur-Tail Studios. All rights reserved.
+        <!-- FOOTER -->
 
-    </footer>
+        <footer>
+            © 2026 FUR-TAIL STUDIOS. ALL RIGHTS RESERVED.
+        </footer>
 
-    <!-- ANIMATED PARTICLES -->
+    </div>
+
+    <!-- FUR-GUARD PROTECTION BADGE -->
+
+    <div id="furguard-badge" role="region" aria-label="Fur-Guard branding">
+
+        <img
+            src="assets/fur-guard-emblem.png"
+            alt="Fur-Guard wolf emblem"
+        >
+
+        <div class="furguard-text">
+
+            <span class="furguard-title">
+                Protected by Fur-Guard
+            </span>
+
+            <span class="furguard-subtitle">
+                24h safety that never stops
+            </span>
+
+        </div>
+
+        <button
+            class="furguard-close"
+            id="furguard-close"
+            aria-label="Close Fur-Guard badge"
+            title="Close badge"
+        >
+            &times;
+        </button>
+
+    </div>
+
+    <!-- JAVASCRIPT -->
 
     <script>
+
+        /* FUR-GUARD BADGE DISMISSAL */
+
+        const badge = document.getElementById("furguard-badge");
+        const closeButton = document.getElementById("furguard-close");
+
+        try {
+            if (localStorage.getItem("furguardBadgeClosed") === "true") {
+                badge.style.display = "none";
+            }
+        } catch (error) {
+            // Badge remains available if browser storage is disabled.
+        }
+
+        closeButton.addEventListener("click", function () {
+
+            badge.style.display = "none";
+
+            try {
+                localStorage.setItem("furguardBadgeClosed", "true");
+            } catch (error) {
+                // Closing still works for this page view.
+            }
+
+        });
+
+        /* BACKGROUND PARTICLES */
 
         const canvas = document.getElementById("particles");
         const ctx = canvas.getContext("2d");
@@ -483,46 +522,32 @@
         let particles = [];
 
         function resizeCanvas() {
-
             canvas.width = window.innerWidth;
             canvas.height = window.innerHeight;
 
-        }
-
-        function createParticles() {
-
             particles = [];
 
-            for (let i = 0; i < 65; i++) {
+            const amount = Math.min(
+                Math.floor(window.innerWidth / 12),
+                100
+            );
 
+            for (let i = 0; i < amount; i++) {
                 particles.push({
-
                     x: Math.random() * canvas.width,
-
                     y: Math.random() * canvas.height,
-
-                    size: Math.random() * 2,
-
-                    speed: Math.random() * 0.5 + 0.1
-
+                    size: Math.random() * 1.5 + 0.3,
+                    speed: Math.random() * 0.3 + 0.1,
+                    opacity: Math.random() * 0.5 + 0.1
                 });
-
             }
-
         }
 
         function animateParticles() {
 
-            ctx.clearRect(
-                0,
-                0,
-                canvas.width,
-                canvas.height
-            );
+            ctx.clearRect(0, 0, canvas.width, canvas.height);
 
-            particles.forEach(p => {
-
-                ctx.fillStyle = "rgba(220,220,220,0.5)";
+            for (const p of particles) {
 
                 ctx.beginPath();
 
@@ -534,48 +559,27 @@
                     Math.PI * 2
                 );
 
+                ctx.fillStyle = `rgba(220,220,220,${p.opacity})`;
                 ctx.fill();
 
                 p.y -= p.speed;
 
                 if (p.y < 0) {
-
                     p.y = canvas.height;
-
                     p.x = Math.random() * canvas.width;
-
                 }
 
-            });
+            }
 
             requestAnimationFrame(animateParticles);
-
         }
 
         resizeCanvas();
-
-        createParticles();
-
         animateParticles();
 
-        window.addEventListener("resize", () => {
-
-            resizeCanvas();
-
-            createParticles();
-
-        });
-
-        console.log(
-            "FUR-TAIL STUDIOS ONLINE"
-        );
-
-        console.log(
-            "Independent development. Unlimited imagination."
-        );
+        window.addEventListener("resize", resizeCanvas);
 
     </script>
 
 </body>
-
 </html>
