@@ -1,1 +1,268 @@
 
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<meta name="theme-color" content="#100b05">
+
+<title>Fur-Guard | Enhanced Verification</title>
+
+<style>
+* {
+    box-sizing: border-box;
+}
+
+body {
+    margin: 0;
+    min-height: 100vh;
+    background: radial-gradient(circle at center, #30200c, #100b05 75%);
+    color: #eee;
+    font-family: Arial, Helvetica, sans-serif;
+    text-align: center;
+    display: flex;
+    justify-content: center;
+}
+
+.container {
+    width: 90%;
+    max-width: 650px;
+    padding: 40px 20px;
+}
+
+.logo {
+    width: 165px;
+    height: 165px;
+    object-fit: contain;
+    margin-bottom: 15px;
+}
+
+h1 {
+    font-size: 34px;
+    letter-spacing: 6px;
+    margin: 10px 0;
+}
+
+.subtitle {
+    color: #bd9251;
+    font-size: 11px;
+    letter-spacing: 3px;
+    margin-bottom: 35px;
+}
+
+.status {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    gap: 12px;
+    margin: 25px 0;
+    font-size: 12px;
+    letter-spacing: 3px;
+    color: #ffbd62;
+}
+
+.status-light {
+    width: 9px;
+    height: 9px;
+    border-radius: 50%;
+    background: #ffad42;
+    box-shadow: 0 0 14px #ffad42;
+}
+
+.panel {
+    background: rgba(255,255,255,.045);
+    border: 1px solid #795323;
+    border-radius: 14px;
+    padding: 30px 25px;
+    box-shadow: 0 10px 40px rgba(0,0,0,.4);
+}
+
+.panel h2 {
+    color: #ffc16b;
+    font-size: 22px;
+}
+
+.panel p {
+    color: #b8aa98;
+    font-size: 14px;
+    line-height: 1.7;
+}
+
+.bones {
+    display: flex;
+    justify-content: center;
+    gap: 35px;
+    margin: 25px 0;
+}
+
+.bone {
+    font-size: 28px;
+    animation: spin 2s linear infinite;
+}
+
+.bone:nth-child(2) {
+    animation-direction: reverse;
+    animation-delay: .3s;
+}
+
+@keyframes spin {
+    to { transform: rotate(360deg); }
+}
+
+.checks {
+    margin-top: 25px;
+    text-align: left;
+}
+
+.check {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    padding: 14px 12px;
+    margin: 8px 0;
+    border: 1px solid #49361f;
+    border-radius: 7px;
+    background: rgba(255,255,255,.025);
+    font-size: 13px;
+}
+
+.check-name {
+    color: #ddd;
+}
+
+.check-status {
+    color: #ffbd62;
+    font-size: 11px;
+    letter-spacing: 1px;
+}
+
+.footer {
+    margin-top: 40px;
+    color: #927d60;
+    font-size: 10px;
+    letter-spacing: 2px;
+    line-height: 2.2;
+}
+
+.footer strong {
+    color: #d6b47e;
+}
+
+.legal {
+    margin-top: 25px;
+    padding: 14px;
+    border: 1px solid #49361f;
+    border-radius: 8px;
+    color: #a18d70;
+    font-size: 10px;
+    line-height: 1.8;
+}
+
+@media (prefers-reduced-motion: reduce) {
+    .bone {
+        animation: none;
+    }
+}
+
+@media (max-width: 480px) {
+    .logo {
+        width: 140px;
+        height: 140px;
+    }
+
+    h1 {
+        font-size: 27px;
+    }
+}
+</style>
+</head>
+
+<body>
+
+<main class="container">
+
+    <img
+        class="logo"
+        src="assets/fur-guard-amber.png"
+        alt="Fur-Guard amber wolf emblem"
+    >
+
+    <div class="bones" aria-hidden="true">
+        <span class="bone">🦴</span>
+        <span class="bone">🦴</span>
+    </div>
+
+    <h1>FUR-GUARD</h1>
+
+    <div class="subtitle">
+        ENHANCED SECURITY VERIFICATION
+    </div>
+
+    <div class="status" aria-live="polite">
+        <span class="status-light"></span>
+        <span>ADDITIONAL CHECKS</span>
+    </div>
+
+    <section class="panel">
+
+        <h2>Something needs a closer look.</h2>
+
+        <p>
+            Fur-Guard has detected a condition that requires
+            additional verification.
+        </p>
+
+        <p>
+            Our enhanced checking systems are being prepared.
+            We won't be a moment.
+        </p>
+
+        <div class="checks">
+
+            <div class="check">
+                <span class="check-name">Browser diagnostics</span>
+                <span class="check-status">IN PROGRESS</span>
+            </div>
+
+            <div class="check">
+                <span class="check-name">Session consistency</span>
+                <span class="check-status">STANDBY</span>
+            </div>
+
+            <div class="check">
+                <span class="check-name">RandomCore diagnostics</span>
+                <span class="check-status">STANDBY</span>
+            </div>
+
+            <div class="check">
+                <span class="check-name">Cryptographic checks</span>
+                <span class="check-status">STANDBY</span>
+            </div>
+
+            <div class="check">
+                <span class="check-name">System integrity</span>
+                <span class="check-status">STANDBY</span>
+            </div>
+
+        </div>
+
+    </section>
+
+    <div class="footer">
+        <strong>FUR-GUARD SYSTEMS ACTIVE</strong>
+        <br>
+        24H SAFETY THAT NEVER STOPS
+        <br><br>
+        POWERED BY FUR-TAIL STUDIOS
+    </div>
+
+    <div class="legal">
+        <strong>PAWSLVANIA SECURITY NOTICE</strong>
+        <br>
+        "In pawslvania touching this is a FEDARAL crime and WILL remove your treets"
+    </div>
+
+</main>
+
+</body>
+</html>
